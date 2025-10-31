@@ -181,12 +181,13 @@ function buildWeek(
   adaptFatigue: boolean
 ): WeekPlan {
   const phase = phaseOfWeek(wIndex, totalWeeks);
-  const split = disciplineSplit(distance);
-  const distMin = {
-    Swim: Math.round(minutes * split.Swim),
-    Bike: Math.round(minutes * split.Bike),
-    Run: Math.round(minutes * split.Run),
-  };
+  // split and distMin reserved for future use
+  // const split = disciplineSplit(distance);
+  // const distMin = {
+  //   Swim: Math.round(minutes * split.Swim),
+  //   Bike: Math.round(minutes * split.Bike),
+  //   Run: Math.round(minutes * split.Run),
+  // };
   intensityDistribution(philosophy); // reserved for future use
 
   // Long sessions
@@ -641,12 +642,16 @@ export default function TriPlanAI() {
     try {
       const v = localStorage.getItem("tri_settingsCollapsed");
       if (v !== null) setSettingsCollapsed(v === "1");
-    } catch {}
+    } catch {
+      // localStorage not available
+    }
   }, []);
   useEffect(() => {
     try {
       localStorage.setItem("tri_settingsCollapsed", settingsCollapsed ? "1" : "0");
-    } catch {}
+    } catch {
+      // localStorage not available
+    }
   }, [settingsCollapsed]);
 
   // Keyboard shortcut: press "S" to toggle settings (ignored when typing in inputs)
