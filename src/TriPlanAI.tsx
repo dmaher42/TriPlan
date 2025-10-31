@@ -163,32 +163,33 @@ function disciplineSplit(distance: DistanceKey) {
     : { Swim: 0.18, Bike: 0.52, Run: 0.3 };
 }
 
-function intensityDistribution(philosophy: Philosophy) {
-  // Returns fraction of HARD minutes (Z3+)
-  if (philosophy === "polarized") return { hard: 0.2, easy: 0.8 };
-  return { hard: 0.35, easy: 0.65 }; // pyramidal has more tempo/threshold
-}
+// Reserved for future use
+// function intensityDistribution(philosophy: Philosophy) {
+//   // Returns fraction of HARD minutes (Z3+)
+//   if (philosophy === "polarized") return { hard: 0.2, easy: 0.8 };
+//   return { hard: 0.35, easy: 0.65 }; // pyramidal has more tempo/threshold
+// }
 
 function buildWeek(
   wIndex: number,
   totalWeeks: number,
   distance: DistanceKey,
   minutes: number,
-  philosophy: Philosophy,
+  _philosophy: Philosophy, // reserved for future use
   availability: { longRideDay: number; longRunDay: number; restDay: number },
   includeStrength: boolean,
   includeMobility: boolean,
   adaptFatigue: boolean
 ): WeekPlan {
   const phase = phaseOfWeek(wIndex, totalWeeks);
-  // split and distMin reserved for future use
+  // split, distMin, and intensityDistribution reserved for future use
   // const split = disciplineSplit(distance);
   // const distMin = {
   //   Swim: Math.round(minutes * split.Swim),
   //   Bike: Math.round(minutes * split.Bike),
   //   Run: Math.round(minutes * split.Run),
   // };
-  intensityDistribution(philosophy); // reserved for future use
+  // intensityDistribution(philosophy);
 
   // Long sessions
   const longBikeMin = distance === "70.3" ? (phase === "Peak" ? 210 : 180) : phase === "Peak" ? 330 : 300; // 3–3.5h vs 5–5.5h
